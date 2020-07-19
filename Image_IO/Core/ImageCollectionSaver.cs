@@ -34,11 +34,13 @@ namespace Image_IO.Core
             ImageCodecInfo imageCodecInfo = GetEncoderInfo(ImageFormat.Jpeg);
             EncoderParameters encoderParameters = GetEncoderParameters();
 
-            string originalSavePath = Path.Combine(Directory.GetCurrentDirectory(), _saveModel.Directory, _saveModel.FileName);
+            string rootPath = Path.Combine(Directory.GetCurrentDirectory(), "upload");
 
-            if (!Directory.Exists(Path.Combine(Directory.GetCurrentDirectory(), _saveModel.Directory)))
+            string originalSavePath = Path.Combine(rootPath, _saveModel.Directory, _saveModel.FileName);
+
+            if (!Directory.Exists(Path.Combine(rootPath, _saveModel.Directory)))
             {
-                Directory.CreateDirectory(Path.Combine(Directory.GetCurrentDirectory(), _saveModel.Directory));
+                Directory.CreateDirectory(Path.Combine(rootPath, _saveModel.Directory));
             }
 
             _saveModel.OriginalImage.Save(originalSavePath);
@@ -47,7 +49,7 @@ namespace Image_IO.Core
             foreach (var item in _saveModel.Images)
             {
                 string eachFileName = Path.GetFileNameWithoutExtension(_saveModel.FileName) + "_" + item.Width + Path.GetExtension(_saveModel.FileName);
-                string eachSavePath = Path.Combine(Directory.GetCurrentDirectory(), _saveModel.Directory, eachFileName);
+                string eachSavePath = Path.Combine(rootPath, _saveModel.Directory, eachFileName);
 
                 item.Save(eachSavePath, imageCodecInfo, encoderParameters);
                 result.Add(Path.Combine(_saveModel.Directory, eachFileName).Replace("\\", "/"));
