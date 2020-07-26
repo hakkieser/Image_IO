@@ -19,6 +19,7 @@ namespace Image_IO
         {
             services.AddGrpc();
             services.AddSingleton<I_ImageCollectionSaver, ImageCollectionSaver>();
+          
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

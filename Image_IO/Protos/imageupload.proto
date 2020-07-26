@@ -4,17 +4,25 @@ option csharp_namespace = "Image_IO";
 
 package imageupload;
 
-service ImageUploader {
+service ImageUploader { 
   rpc Upload (UploadRequest) returns (UploadReply);
+ 
 }
 
+ 
+ 
+ 
 message UploadRequest {
   bytes file = 1; 
   string fileName = 2;
   string directory = 3;
 }
-
-message UploadReply { 
-  string errorMessage = 1;
-  bool hasError = 2;
+ 
+message UploadReply {  
+  string uploadPath = 1;
+  string errorMessage = 2;
+  bool hasError = 3;
 }
+
+
+ 

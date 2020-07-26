@@ -37,6 +37,8 @@ namespace Image_IO
                 };
 
                 var saveList = imageCollectionSaver.Save(saveModel);
+
+                result.UploadPath = "upload/" + request.Directory + request.FileName;
             }
             catch (Exception ex)
             {
@@ -45,5 +47,7 @@ namespace Image_IO
 
             return Task.FromResult(result);
         }
+
+          
     }
 }
